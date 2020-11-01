@@ -3,5 +3,6 @@
 
 int main() {
 	printf("son is running");
+	printf("hello");
 	return 0;
 }
