@@ -3,12 +3,14 @@
 #include <stdio.h>
 #include "Father.h"
 
-static unsigned int dimensions;
-static unsigned int generations;
+
 
 //command line: Father.exe, input.txt
 int main(int argc, char* argv[]) {
 	FILE* input_file = NULL, * output_file = NULL;
+	unsigned int dimensions;
+	unsigned int generations;
+	int i = 0;
 
 	//check if there 2 arguments
 	if (argc < 2) {
@@ -27,37 +29,22 @@ int main(int argc, char* argv[]) {
 	}
 	if (NULL == (output_file = fopen("output.txt", "w"))) {
 		printf("ERROR:can't open output file\n");
+		fclose(input_file);
 		return 1;
 	}
+	fscanf(input_file, "%u\n%u\n", &dimensions, &generations);//reading variables from input file
+	read_forest_table(input_file, dimensions);//reading forest table from input file and assign it in a global variable
 
-	set_dimension_generations(input_file); //reading variables from input file
+	while (i < generations) {
+		print_next_generation( dimensions, output_file);
+		i++;
+	}
 
 
-
+	free_forest_table();
 	fclose(input_file);
 	fclose(output_file);
 	return 0;
 }
 
-void set_dimension_generations(FILE* input_file)
-{
 
-	fscanf(input_file, "%u\n%u\n", &dimensions, &generations);
-}
-
-void father(FILE* input_file, FILE* output_file) {
-
-	////printf("%u\n%d\n", dimensions, generations);
-	//allocate_memory_to_forest_string(dimensions);
-	read_forest_table(input_file, forest_table, dimensions);
-
-	//printf("{%s}\n", forest_table);
-	//while (i < generations) {
-	//	forest_table = load_next_generation(forest_table, dimensions);
-	//	printf("{%s}\n", forest_table);
-	//	i++;
-	//}
-
-
-	//free(forest_table);
-}
