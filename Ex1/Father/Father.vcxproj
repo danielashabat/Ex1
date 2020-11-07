@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="procces.c" />
     <ClCompile Include="Father.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>

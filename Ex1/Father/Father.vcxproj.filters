@@ -21,6 +21,9 @@
     <ClCompile Include="Father.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="procces.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Father.h">
