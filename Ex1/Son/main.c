@@ -17,14 +17,11 @@ int main(int argc, char* argv[]) {
 		char* forest_string = argv[1];
 		num_of_burned_trees = calculate_number_of_burned_trees(forest_string);
 	}
-	
-	
 	return num_of_burned_trees;
 }
 
 // find how much burend trees we have in the forest
 //every burn free mark as 'F' so we count all 'F' in the forest string
-
 int calculate_number_of_burned_trees(char* forest_table) {
 	int number_of_burned_tree = 0;
 	for (int i = 0; i < strlen(forest_table); i++) {

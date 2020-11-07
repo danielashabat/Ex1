@@ -21,13 +21,13 @@ int CreateProcessSimpleMain(char* forest_string)
 	TCHAR* project_name = L"Son.exe ";
 	TCHAR command[0x100] = { 0 };
 	wsprintf(command, TEXT("%s %hs"), project_name, forest_string);
-	//strcat(project_name, forest_string);
+	
 
 	PROCESS_INFORMATION procinfo;
 	DWORD				waitcode;
 	DWORD				exitcode;
 	BOOL				retVal;
-	//TCHAR				command[] = project_name;
+	
 
 	
 

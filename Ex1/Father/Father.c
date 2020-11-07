@@ -9,15 +9,17 @@ void father(FILE* input_file, FILE* output_file) {
 	unsigned int generations;
 	char *forest_table = { 0 };
 	int i = 1;
-	
+	int num_of_burned_tree = 0;
 	fscanf(input_file , "%u\n%u\n", &dimensions, &generations); //reading variables from input file
 	//printf("%u\n%d\n", dimensions, generations);
 	forest_table = allocate_memory_to_forest_string(dimensions);
 	read_forest_table(input_file,forest_table,dimensions);
-	printf("%s - %d \n", forest_table);
+	num_of_burned_tree = CreateProcessSimpleMain(forest_table);
+	printf("%s - %d \n", forest_table,num_of_burned_tree);
 	while (i < generations) {
 		forest_table = load_next_generation(forest_table, dimensions);
-		printf("%s \n", forest_table);
+		num_of_burned_tree = CreateProcessSimpleMain(forest_table);
+		printf("%s - %d\n", forest_table, num_of_burned_tree);
 		i++;
 	}
 	
