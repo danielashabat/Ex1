@@ -12,6 +12,8 @@ static void spread_fire(char* new_forest_table, unsigned int dim);
 static void find_trees_around(int i, char* forest_table, unsigned int d, int j, char* new_forest_table);
 static char* allocate_memory_to_forest_table(unsigned int dimensions);
 static void print_to_output_file(FILE* output_file);
+static int CreateProcessSimpleMain();
+static BOOL CreateProcessSimple(LPTSTR CommandLine, PROCESS_INFORMATION* ProcessInfoPtr);
 
 static char* forest_table;
 
@@ -137,10 +139,8 @@ static void print_to_output_file(FILE* output_file) {
 
 
 /***********Process functions**********************/
-BOOL CreateProcessSimple(LPTSTR CommandLine, PROCESS_INFORMATION* ProcessInfoPtr);
-int CreateProcessSimpleMain();
 
-int CreateProcessSimpleMain()
+static int CreateProcessSimpleMain()
 
 {
 	TCHAR* project_name = L"Son.exe ";
@@ -193,7 +193,7 @@ int CreateProcessSimpleMain()
 
 /*oOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoO*/
 
-BOOL CreateProcessSimple(LPTSTR CommandLine, PROCESS_INFORMATION* ProcessInfoPtr)
+static BOOL CreateProcessSimple(LPTSTR CommandLine, PROCESS_INFORMATION* ProcessInfoPtr)
 {
 	STARTUPINFO	startinfo = { sizeof(STARTUPINFO), NULL, 0 }; /* <ISP> here we */
 															  /* initialize a "Neutral" STARTUPINFO variable. Supplying this to */
