@@ -4,10 +4,16 @@
 #include <string.h>
 #include "Father.h"
 
+static void change_fire_to_ground(char* forest_table, char* new_forest_table, unsigned int d);
+static int is_on_fire(char block_state);
+static void find_trees_around(int i, char* forest_table, unsigned int d, int j, char* new_forest_table);
+
+static char* forest_table;
+
 void father(FILE* input_file, FILE* output_file) {
 	unsigned int dimensions;
 	unsigned int generations;
-	char *forest_table = { 0 };
+	//char *forest_table = { 0 };
 	int i = 1;
 
 	fscanf(input_file , "%u\n%u\n", &dimensions, &generations); //reading variables from input file
@@ -81,26 +87,37 @@ static void change_ground_to_tree(char* forest_table, char* new_forest_table, un
 	}
 }
 //fire spreads to all the nearby trees (not include diagonal neighbors)
-static void spread_fire(char* forest_table, char* new_forest_table, unsigned int d) {
-	for (int i = 0; i < d; i++) {
-		for (int j = 0; j < d; j++) {
-			if (forest_table[i*d +j] == 'F') {
-				//search for near trees
-				if (i > 0) //check from above
-					if (forest_table[(i - 1)*d+j] == 'T')
-						new_forest_table[(i - 1)*d+j] = 'F';
-				if (i < (d - 1)) //check from below
-					if (forest_table[(i + 1)*d+j] == 'T')
-						new_forest_table[(i + 1)*d+j] = 'F';
-				if (j < (d - 1)) //check from the right
-					if (forest_table[i*d+j + 1] == 'T')
-						new_forest_table[i*d+j + 1] = 'F';
-				if (j > 0) //check from the left
-					if (forest_table[i*d +j - 1] == 'T')
-						new_forest_table[i*d+ j - 1] = 'F';
+static void spread_fire(char* forest_table, char* new_forest_table, unsigned int dim) {
+	for (int i = 0; i < dim; i++) {
+		for (int j = 0; j < dim; j++) {
+			int current_block_index = i * dim + j;
+			if (is_on_fire(forest_table[current_block_index])) {
+				find_trees_around(i, forest_table, dim, j, new_forest_table);
 			}
 		}
 	}
+}
+
+static int is_on_fire(char block_state)
+{
+	return (block_state == 'F');
+}
+
+static void find_trees_around(int i, char* forest_table, unsigned int d, int j, char* new_forest_table)
+{
+	//search for near trees
+	if (i > 0) //check from above
+		if (forest_table[(i - 1) * d + j] == 'T')
+			new_forest_table[(i - 1) * d + j] = 'F';
+	if (i < (d - 1)) //check from below
+		if (forest_table[(i + 1) * d + j] == 'T')
+			new_forest_table[(i + 1) * d + j] = 'F';
+	if (j < (d - 1)) //check from the right
+		if (forest_table[i * d + j + 1] == 'T')
+			new_forest_table[i * d + j + 1] = 'F';
+	if (j > 0) //check from the left
+		if (forest_table[i * d + j - 1] == 'T')
+			new_forest_table[i * d + j - 1] = 'F';
 }
 
 
@@ -116,7 +133,7 @@ static void spread_fire(char* forest_table, char* new_forest_table, unsigned int
 
 
 //reading forest table from input file and assign it into 2D array
-static void read_forest_table(FILE* input_file,char *forest_table,unsigned int d) {
+static void read_forest_table(FILE* input_file,unsigned int d) {
 	unsigned int i = 0;
 	unsigned int j = 0;
 	

@@ -1,7 +1,10 @@
 ///FILE COMMENTS
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include "Father.h"
 
+static unsigned int dimensions;
+static unsigned int generations;
 
 //command line: Father.exe, input.txt
 int main(int argc, char* argv[]) {
@@ -26,9 +29,35 @@ int main(int argc, char* argv[]) {
 		printf("ERROR:can't open output file\n");
 		return 1;
 	}
-	father(input_file, output_file);
+
+	set_dimension_generations(input_file); //reading variables from input file
+
+
 
 	fclose(input_file);
 	fclose(output_file);
 	return 0;
+}
+
+void set_dimension_generations(FILE* input_file)
+{
+
+	fscanf(input_file, "%u\n%u\n", &dimensions, &generations);
+}
+
+void father(FILE* input_file, FILE* output_file) {
+
+	////printf("%u\n%d\n", dimensions, generations);
+	//allocate_memory_to_forest_string(dimensions);
+	read_forest_table(input_file, forest_table, dimensions);
+
+	//printf("{%s}\n", forest_table);
+	//while (i < generations) {
+	//	forest_table = load_next_generation(forest_table, dimensions);
+	//	printf("{%s}\n", forest_table);
+	//	i++;
+	//}
+
+
+	//free(forest_table);
 }
