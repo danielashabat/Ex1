@@ -1,11 +1,23 @@
 
+/*oOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoO*/
+/*
+ Authors: Anat Sinai and Daniela Shabat 316415645
+ This project was written for Tel Aviv unviersity course for learning about creating processes
+ Project name: 'Exercise 1'
+ decsription:in this module written all the implemantation of functions that belong to the father. 
+*/
+/*oOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoO*/
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <stdlib.h> 
 #include <string.h>
 #include <windows.h>
 //#include <tchar.h>
 #include "Father.h"
+/*oOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoO*/
 
+/* function declarations for static functions ( internal functions that */
+/* are not visible outside this file ) */
 static void change_fire_to_ground(char* new_forest_table, unsigned int dim);
 static void change_ground_to_tree(char* new_forest_table, unsigned int dim);
 static void spread_fire(char* new_forest_table, unsigned int dim);
@@ -14,9 +26,11 @@ static char* allocate_memory_to_forest_table(unsigned int dimensions);
 static void print_to_output_file(FILE* output_file);
 static int CreateProcessSimpleMain();
 static BOOL CreateProcessSimple(LPTSTR CommandLine, PROCESS_INFORMATION* ProcessInfoPtr);
-
+/*oOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoO*/
+//declaration on static variables
 static char* forest_table;
 
+/*oOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoO*/
 void print_next_generation(unsigned int dimensions,FILE* output_file) {
 
 	char* new_forest_table = { 0 };

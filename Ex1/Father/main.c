@@ -1,6 +1,14 @@
-///FILE COMMENTS
+/*oOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoO*/
+/*
+ Authors: Anat Sinai and Daniela Shabat 316415645
+ This project was written for Tel Aviv unviersity course for learning about creating processes 
+ Project name: 'Exercise 1' 
+ decsription: this module runs the father's main of the project
+*/
+/*oOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoO*/
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <stdlib.h> 
 #include "Father.h"
 
 
