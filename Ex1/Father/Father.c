@@ -85,7 +85,7 @@ static void change_ground_to_tree(char* new_forest_table, unsigned int dim) {
 		}
 	}
 }
-//fire spreads to all the nearby trees (not include diagonal neighbors)
+//if the 'block' is 'fire',than all the nearby trees turn to 'fire'(not include diagonal neighbors)
 static void spread_fire(char* new_forest_table, unsigned int dim) {
 	for (int i = 0; i < dim; i++) {
 		for (int j = 0; j < dim; j++) {
