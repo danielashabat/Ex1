@@ -23,25 +23,31 @@ int main(int argc, char* argv[]) {
 	//check if there 2 arguments
 	if (argc < 2) {
 		printf("ERROR:not enough arguments!");
-			return 1;
+			return EXIT_FAILURE;
 	}
 	if (argc > 2) {
 		printf("ERROR:too many arguments!");
-		return 1;
+		return EXIT_FAILURE;
 	}
 
 	//check if the files opened
 	if ( NULL == (input_file = fopen(argv[1], "r")) ){
 		printf("ERROR:can't open input file\n");
-		return 1;
+		return EXIT_FAILURE;
 	}
 	if (NULL == (output_file = fopen("output.txt", "w"))) {
 		printf("ERROR:can't open output file\n");
 		fclose(input_file);
-		return 1;
+		return EXIT_FAILURE;
 	}
 	fscanf(input_file, "%u\n%u\n", &dimensions, &generations);//reading variables from input file
-	read_forest_table(input_file, dimensions);//reading forest table from input file and assign it in a global variable
+	if (read_forest_table(input_file, dimensions) == EXIT_FAILURE) //if the function failed exit program
+	{
+		free_forest_table();
+		fclose(input_file);
+		fclose(output_file);
+		return EXIT_FAILURE;
+	}
 
 	while (i < generations) {
 		print_next_generation( dimensions, output_file);

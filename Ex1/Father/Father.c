@@ -120,31 +120,38 @@ static void find_trees_around(int i, char* forest_table, unsigned int d, int j, 
 static char* allocate_memory_to_forest_table(unsigned int dimensions) {
 	char* new_ptr = NULL;
 	new_ptr = (char*)malloc((dimensions* dimensions+1)*sizeof(char));//create 2D array, need +1 for ending '\0'
-	ALLOCATION_ERROR(new_ptr);
-	return new_ptr;
+	if (new_ptr != NULL)
+		return new_ptr;
+	else 
+	{
+		printf("allocation failed\n");
+		return EXIT_FAILURE;
+	}
 }
 void free_forest_table() {
 	free(forest_table);
 }
 
 //reading forest table from input file and assign it into char array
-void read_forest_table(FILE* input_file,unsigned int dim ) {
+int read_forest_table(FILE* input_file,unsigned int dim ) {
 	unsigned int i = 0;
 	unsigned int j = 0;
-	forest_table= allocate_memory_to_forest_table(dim); 
-	for (i = 0; i < dim; i++) {
-		for (j = 0; j < dim; j++) {
-			if (!feof(input_file)) {
-				forest_table[i*dim + j] = fgetc(input_file);
-				fgetc(input_file);//filtering ',' or '\n'
-			}
-			else {
-				printf("ERROR:table data not matched to dimensions!");
-				return 1;////reading failed close all files and exit********
+	if ((forest_table = allocate_memory_to_forest_table(dim)) == EXIT_FAILURE)
+		return EXIT_FAILURE;//allocation failed, return to main and end program
+		for (i = 0; i < dim; i++) {
+			for (j = 0; j < dim; j++) {
+				if (!feof(input_file)) {
+					forest_table[i * dim + j] = fgetc(input_file);
+					fgetc(input_file);//filtering ',' or '\n'
+				}
+				else {
+					printf("ERROR:table data not matched to dimensions!");
+					return EXIT_FAILURE;////reading failed close all files and exit
+				}
 			}
 		}
-	}
-	forest_table[i*dim] = '\0'; //add in the end of the array
+		forest_table[i * dim] = '\0'; //add in the end of the array
+		return 0;
 }
 
 static void print_to_output_file(FILE* output_file) {
