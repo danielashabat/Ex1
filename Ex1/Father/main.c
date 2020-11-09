@@ -1,6 +1,6 @@
 /*oOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoO*/
 /*
- Authors: Anat Sinai and Daniela Shabat 316415645
+ Authors: Anat Sinai 312578149 and Daniela Shabat 316415645
  This project was written for Tel Aviv unviersity course for learning about creating processes 
  Project name: 'Exercise 1' 
  decsription: this module runs the father's main of the project
