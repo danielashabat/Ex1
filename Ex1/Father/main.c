@@ -50,7 +50,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	while (i < generations) {
-		print_next_generation( dimensions, output_file);
+		print_next_generation( dimensions, output_file);//calculate the next generation ant print the table data to output_file
 		i++;
 	}
 

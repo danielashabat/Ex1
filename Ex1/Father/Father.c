@@ -31,8 +31,9 @@ static BOOL CreateProcessSimple(LPTSTR CommandLine, PROCESS_INFORMATION* Process
 static char* forest_table;
 
 /*oOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoO*/
-void print_next_generation(unsigned int dimensions,FILE* output_file) {
 
+//full description ih the header file
+void print_next_generation(unsigned int dimensions,FILE* output_file) {
 	char* new_forest_table = { 0 };
 	new_forest_table = allocate_memory_to_forest_table(dimensions);
 	strcpy(new_forest_table, forest_table);//copy forest_table to new variable
@@ -44,7 +45,7 @@ void print_next_generation(unsigned int dimensions,FILE* output_file) {
 	free(forest_table);//free old forest table
 	forest_table = new_forest_table;
 }
-//fire tree changes to ground 
+//'fire tree' changes to ground 
 static void change_fire_to_ground ( char* new_forest_table, unsigned int dim){
 	for (int i = 0; i < dim; i++) {
 		for (int j = 0; j < dim; j++) {
@@ -96,7 +97,7 @@ static void spread_fire(char* new_forest_table, unsigned int dim) {
 	}
 }
 
-
+//finf all the 'trees' around 'fire tree'
 static void find_trees_around(int i, char* forest_table, unsigned int d, int j, char* new_forest_table)
 {
 	//search for near trees
@@ -128,11 +129,14 @@ static char* allocate_memory_to_forest_table(unsigned int dimensions) {
 		return EXIT_FAILURE;
 	}
 }
+//the purpuse of this function is the main can free forest_table that it's only static variable in father's module
+//full description ih the header file
 void free_forest_table() {
 	free(forest_table);
 }
 
 //reading forest table from input file and assign it into char array
+//full description ih the header file
 int read_forest_table(FILE* input_file,unsigned int dim ) {
 	unsigned int i = 0;
 	unsigned int j = 0;
@@ -154,6 +158,7 @@ int read_forest_table(FILE* input_file,unsigned int dim ) {
 		return 0;
 }
 
+//prints the forest_table and creats new process for calculating the number of 'fire trees' in the current forest_table
 static void print_to_output_file(FILE* output_file) {
 	fprintf(output_file,"%s - %d \n", forest_table, CreateProcessSimpleMain());
 }
