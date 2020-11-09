@@ -97,7 +97,7 @@ static void spread_fire(char* new_forest_table, unsigned int dim) {
 	}
 }
 
-//finf all the 'trees' around 'fire tree'
+//find all the 'trees' around 'fire tree'
 static void find_trees_around(int i, char* forest_table, unsigned int d, int j, char* new_forest_table)
 {
 	//search for near trees
