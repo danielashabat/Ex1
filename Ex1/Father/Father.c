@@ -18,16 +18,67 @@
 
 /* function declarations for static functions ( internal functions that */
 /* are not visible outside this file ) */
+
+/**
+ * change_fire_to_ground finds all the the 'fire trees' in forest table and change them to 'ground'
+ * Parameters:
+ * ----------
+ * new_forest_table- pointer to the new table with the curent changes 
+ * dim - the dimension of the forest table(symmetric table)
+ */
 static void change_fire_to_ground(char* new_forest_table, unsigned int dim);
+/**
+ *  change_ground_to_tree check if 'ground' is nearby at least two trees it's changes to a 'tree' (include diagonal neighbors) 
+ * Parameters:
+ * ----------
+ * new_forest_table- pointer to the new table with the curent changes 
+ * dim - the dimension of the forest table(symmetric table)
+ */
 static void change_ground_to_tree(char* new_forest_table, unsigned int dim);
+/**
+ *  spread_fire look for 'fire tree',than changes all the nearby trees to 'fire'(not include diagonal neighbors) 
+ * Parameters:
+ * ----------
+ * new_forest_table- pointer to the new table with the curent changes 
+ * dim - the dimension of the forest table(symmetric table)
+ */
 static void spread_fire(char* new_forest_table, unsigned int dim);
+/**
+ * find_trees_around  find for all the trees around for a given index in the forest table and changes it in the new forest table
+ * Parameters:
+ * ----------
+ * new_forest_table- pointer to the new table with the curent changes 
+ * d- the dimension of the forest table(symmetric table)
+ * i- row number of the index
+ *j - column number og the index
+ */
 static void find_trees_around(int i, char* forest_table, unsigned int d, int j, char* new_forest_table);
+/**
+ * allocate_memory_to_forest_table allocates new memory for string according the dimensions variable from user   
+ * output:return pointer to char array represent the forest table data
+ * Parameters:
+ * ----------
+ * dimensions- the dimension of the forest table(symmetric table)
+ */
 static char* allocate_memory_to_forest_table(unsigned int dimensions);
+
+/**prints the forest_table and creats new process for calculating the number of 'fire trees' in the current forest_table
+ * Parameters:
+ * ----------
+ * output_file- the file to be printed to
+ */
 static void print_to_output_file(FILE* output_file);
+
+//calling for CreateProcessSimple and check the process terminated without error 
+//return '0' if no error encounter, else returns the error code
 static int CreateProcessSimpleMain();
+
+//create new process-'Son.exe'. this process calculate the number of 'fire trees' in the current forest_table
+//Parametrts: Command line,Pointer to PROCESS_INFORMATION structure
 static BOOL CreateProcessSimple(LPTSTR CommandLine, PROCESS_INFORMATION* ProcessInfoPtr);
 /*oOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoO*/
 //declaration on static variables
+// this variable holds the current status of the forest table.
 static char* forest_table;
 
 /*oOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoOoO*/
